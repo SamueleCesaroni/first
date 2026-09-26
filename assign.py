@@ -1,0 +1,28 @@
+import argparse
+import string
+import time
+
+file_path = "mr_hyde.txt"
+
+def process_file(file_path):
+    start_time = time.time()
+    count_dict = {character: 0 for character in string.ascii_lowercase}
+    with open(file_path, encoding='utf-8') as input_file:
+        for line in input_file:
+            for character in line.lower():
+                try:
+                    count_dict[character] += 1
+                except KeyError:
+                    pass
+
+    elapsed_time = time.time() - start_time
+    print(f"Done! Total elapsed time: {elapsed_time:.3f} s")
+    print(count_dict)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filepath')
+    args = parser.parse_args()
+    process_file(args.filepath)
+
+    #process_file("mr_hyde")
